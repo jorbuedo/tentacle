@@ -1,0 +1,18 @@
+.custom-table {
+  @apply mx-auto table-auto;
+}
+.custom-table > thead > tr {
+  @apply bg-gray-200 text-sm uppercase leading-normal text-gray-600;
+}
+.custom-table > thead > tr > th {
+  @apply py-3 px-6 text-left;
+}
+.custom-table > tbody {
+  @apply text-sm font-light text-gray-600;
+}
+.custom-table > tbody > tr {
+  @apply border-b border-gray-200 hover:bg-gray-100;
+}
+.custom-table > tbody > tr > td {
+  @apply whitespace-nowrap py-3 px-6 text-left;
+}

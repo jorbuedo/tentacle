@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS balance (
+  asset TEXT PRIMARY KEY,
+  amount REAL NOT NULL
+);

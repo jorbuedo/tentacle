@@ -1,0 +1,7 @@
+.vscode
+node_modules
+dist
+*.db
+src-tauri/target
+src-tauri/node-bin
+.env*

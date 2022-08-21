@@ -1,0 +1,8 @@
+DROP VIEW IF EXISTS fiat;
+CREATE VIEW fiat AS
+SELECT value
+FROM kv
+WHERE key = 'currentFiat'
+UNION
+SELECT 'ZEUR' AS value
+LIMIT 1;
