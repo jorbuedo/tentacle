@@ -7,7 +7,7 @@ import {
   PublicMethod,
 } from '../lib/kraken'
 import { db } from './database'
-import { getItem, removeItem, setItem } from './kvStorage'
+import { getItem, setItem } from './kvStorage'
 import getNeedsPriceHistoryQuery from '../sql/getNeedsPriceHistory.sql?raw'
 import { view } from '.'
 
@@ -32,6 +32,7 @@ export const initKrakenApi = async () => {
 
     if (key && secret) {
       krakenApi = createApi({ key, secret })
+      view.setState({ hasApiKey: true })
     }
   } catch (err) {
     view.error('Error initializing Kraken api', err)
@@ -44,6 +45,7 @@ export const updateKrakenApiKey = async ({ key, secret }: CreateApiParams) => {
     await setItem(KV_SECRET, secret, false)
 
     krakenApi = createApi({ key, secret })
+    view.setState({ hasApiKey: await hasKrakenKey() })
   } catch (err) {
     view.error('Error updating Kraken api key', err)
   }
@@ -182,4 +184,22 @@ export const updateRelevantPriceHistory = async () => {
     }
     queue(fn)
   })
+}
+
+export const updateAll = async () => {
+  view.setState({ isDataUpdating: true })
+
+  try {
+    await updateAssetPairs()
+
+    if (await hasKrakenKey()) {
+      await updateLedgers()
+    }
+
+    await updateRelevantPriceHistory()
+  } catch (err) {
+    throw err
+  } finally {
+    view.setState({ isDataUpdating: false })
+  }
 }

@@ -1,3 +1,6 @@
+import path from 'node:path'
+import { mkdirSync } from 'node:fs'
+import { homedir } from 'node:os'
 import { Database, RunResult, Statement } from 'sqlite3'
 import { errorBack } from './utils'
 import createKV from '../sql/createKV.sql?raw'
@@ -8,13 +11,16 @@ import viewFiat from '../sql/viewFiat.sql?raw'
 import viewTransactions from '../sql/viewTransactions.sql?raw'
 import viewSales from '../sql/viewSales.sql?raw'
 import viewHodl from '../sql/viewHodl.sql?raw'
-import { view } from '.'
 
 export let db: Database
 
 export const initDb = (filename: string = 'data.db') => {
+  const homePath = path.join(homedir(), '.tentacle')
+  mkdirSync(homePath, { recursive: true })
+  const dbPath = path.join(homePath, filename)
+
   db?.close(errorBack)
-  db = new Database(filename, errorBack)
+  db = new Database(dbPath, errorBack)
   db.exec(createKV)
   db.exec(createLedgers)
   db.exec(createAssetPairs)

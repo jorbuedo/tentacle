@@ -1,9 +1,19 @@
-import { Component } from 'solid-js'
+import { Link } from '@solidjs/router'
+import { Component, JSX } from 'solid-js'
+import { model } from '~/view'
 import { state } from '~/view/state'
 
 const Footer: Component = () => {
+  const handleUpdate: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (e) => {
+    e.preventDefault()
+    model.updateAll()
+  }
+
   return (
-    <footer class="flex justify-end bg-sky-600 py-1 px-4 text-xs  text-white">
+    <footer class="flex justify-end space-x-2 bg-sky-600 py-1 px-4  text-xs text-white">
+      <Link href="/accounts">Accounts</Link>
+      <Link href="/balance">Balance</Link>
+      <button onClick={handleUpdate}>⟳</button>
       {state.isDataUpdating ? 'Updating...' : 'Ready'}
     </footer>
   )

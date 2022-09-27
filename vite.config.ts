@@ -11,6 +11,9 @@ export default defineConfig({
       externals: {
         'sqlite3': 'sqlite3',
         'node:crypto': 'crypto',
+        'node:path': 'path',
+        'node:os': 'os',
+        'node:fs': 'fs',
       },
     }),
     solidPlugin(),
