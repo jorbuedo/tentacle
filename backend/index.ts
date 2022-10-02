@@ -8,8 +8,8 @@ import { initKrakenApi, updateAll } from './model/krakenApi'
   try {
     initDb()
     await initKrakenApi()
-    view.setState({ isModelReady: true })
     await updateAll()
+    view.setState({ isModelReady: true })
   } catch (err) {
     view.error('Error on init: ', err)
   }

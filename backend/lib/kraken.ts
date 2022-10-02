@@ -242,7 +242,7 @@ export const getAllData = async ({
   params = {},
   callback = () => null,
   selector = getMethodsWithOffsetSelector(method),
-  rateLimitTimeout = 610_000,
+  rateLimitTimeout = 61_000,
 }: AllDataParams) => {
   const time = Date.now() / 1000
   const { ofs = 0, end = time, ...restParams } = params

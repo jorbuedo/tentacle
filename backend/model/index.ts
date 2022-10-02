@@ -15,6 +15,7 @@ export const initView = () => {
     deserialize,
     post: (data) => console.log(data),
     on: (fn) => stdin.on('data', fn),
+    eventNames: ['setState', 'log', 'error'],
   })
 
   return view

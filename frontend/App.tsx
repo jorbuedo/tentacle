@@ -20,7 +20,7 @@ const App: Component = () => {
       <main id="main-content">
         <Route />
       </main>
-      <Footer />
+      <Footer class="fixed bottom-0 w-full" />
     </Show>
   )
 }

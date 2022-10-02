@@ -3,14 +3,21 @@ import { Component, JSX } from 'solid-js'
 import { model } from '~/view'
 import { state } from '~/view/state'
 
-const Footer: Component = () => {
+type FooterProps = {
+  class?: string
+}
+
+const Footer: Component<FooterProps> = (props) => {
   const handleUpdate: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (e) => {
     e.preventDefault()
     model.updateAll()
   }
 
   return (
-    <footer class="flex justify-end space-x-2 bg-sky-600 py-1 px-4  text-xs text-white">
+    <footer
+      classList={{ [props.class ?? '']: true }}
+      class="flex justify-end space-x-2 bg-sky-600 py-1 px-4  text-xs text-white"
+    >
       <Link href="/accounts">Accounts</Link>
       <Link href="/balance">Balance</Link>
       <button onClick={handleUpdate}>⟳</button>

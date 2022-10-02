@@ -18,11 +18,6 @@ body {
   overscroll-behavior-y: contain;
 }
 
-#root > footer {
-  position: sticky;
-  top: 100vh;
-}
-
 #nprogress {
   pointer-events: none;
 }

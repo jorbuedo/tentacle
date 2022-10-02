@@ -1,4 +1,4 @@
-import { throttledQueue } from '../lib/utils'
+import { delay, throttledQueue } from '../lib/utils'
 import {
   createApi,
   getAllData,
@@ -90,7 +90,6 @@ export const insertPriceHistory = (priceHistory: Record<string, any>) => {
 }
 
 export const insertLedgers = (ledgers: Record<string, any>) => {
-  view.log('ledgers insert')
   db.exec('BEGIN TRANSACTION')
   const stmt = db.prepare(`
     REPLACE INTO ledgers (id, refid, time, type, subtype, aclass, asset, amount, fee, balance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -166,24 +165,35 @@ export const updateLedgers = async (forceUpdate: boolean = false) => {
 
 export const updateRelevantPriceHistory = async () => {
   const queue = throttledQueue(1, 500)
+  view.setState({ isDataUpdating: true })
 
   db.each(getNeedsPriceHistoryQuery, (_, { name, time }) => {
     const fn = async () => {
-      view.log(`Updating price for ${name}-${time}`)
-      const { [name]: list } = await krakenApi({
-        method: PublicMethod.Trades,
-        params: { pair: name, since: time },
-      })
-      const [price] = list[0]
+      try {
+        view.log(`Updating price for ${name}-${time}`)
+        const { [name]: list } = await krakenApi({
+          method: PublicMethod.Trades,
+          params: { pair: name, since: time },
+        })
+        const [price] = list[0]
 
-      db.run('REPLACE INTO priceHistory (pair, time, price) VALUES (?, ?, ?)', [
-        name,
-        time,
-        price,
-      ])
+        db.run(
+          'REPLACE INTO priceHistory (pair, time, price) VALUES (?, ?, ?)',
+          [name, time, price]
+        )
+      } catch (err: any) {
+        if (err.message === 'General:Too many requests') {
+          await delay(60_000)
+          await fn()
+        } else {
+          throw err
+        }
+      }
     }
     queue(fn)
   })
+
+  view.setState({ isDataUpdating: false })
 }
 
 export const updateAll = async () => {

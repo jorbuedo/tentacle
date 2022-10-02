@@ -1,4 +1,4 @@
-import { ChildrenReturn, ParentComponent } from 'solid-js'
+import { ParentComponent } from 'solid-js'
 
 type CardProps = {
   outterClass?: string

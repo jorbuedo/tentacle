@@ -16,7 +16,7 @@ export const initModel = ({ command, child }: InitModelArgs) => {
     deserialize: JSON.parse,
     post: (data) => child.write(data),
     on: (fn) => command.stdout.on('data', fn),
-    eventNames: ['updateLedgers'],
+    eventNames: ['updateLedgers', 'updateAll'],
   })
   return model
 }
