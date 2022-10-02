@@ -20,6 +20,7 @@ const Footer: Component<FooterProps> = (props) => {
     >
       <Link href="/accounts">Accounts</Link>
       <Link href="/balance">Balance</Link>
+      <Link href="/capital-gains">Capital Gains</Link>
       <button onClick={handleUpdate}>⟳</button>
       {state.isDataUpdating ? 'Updating...' : 'Ready'}
     </footer>
