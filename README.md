@@ -18,6 +18,7 @@ Feel free to browse the code and drop a comment.
 ## Instructions
 
 ```
+npm install
 npm run package
 npm run tauri dev
 ```
