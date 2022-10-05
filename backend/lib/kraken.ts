@@ -4,13 +4,14 @@ import { delay } from './utils'
 // Public/Private method names
 export enum PublicMethod {
   'Time' = 'Time',
+  'SystemStatus' = 'SystemStatus',
   'Assets' = 'Assets',
   'AssetPairs' = 'AssetPairs',
   'Ticker' = 'Ticker',
+  'OHLC' = 'OHLC',
   'Depth' = 'Depth',
   'Trades' = 'Trades',
   'Spread' = 'Spread',
-  'OHLC' = 'OHLC',
 }
 export enum PrivateMethod {
   'Balance' = 'Balance',
@@ -24,8 +25,17 @@ export enum PrivateMethod {
   'Ledgers' = 'Ledgers',
   'QueryLedgers' = 'QueryLedgers',
   'TradeVolume' = 'TradeVolume',
+  'AddExport' = 'AddExport',
+  'ExportStatus' = 'ExportStatus',
+  'RetrieveExport' = 'RetrieveExport',
+  'RemoveExport' = 'RemoveExport',
   'AddOrder' = 'AddOrder',
+  'AddOrderBatch' = 'AddOrderBatch',
+  'EditOrder' = 'EditOrder',
   'CancelOrder' = 'CancelOrder',
+  'CancelAll' = 'CancelAll',
+  'CancelAllOrdersAfter' = 'CancelAllOrdersAfter',
+  'CancelOrderBatch' = 'CancelOrderBatch',
   'DepositMethods' = 'DepositMethods',
   'DepositAddresses' = 'DepositAddresses',
   'DepositStatus' = 'DepositStatus',
@@ -33,6 +43,12 @@ export enum PrivateMethod {
   'Withdraw' = 'Withdraw',
   'WithdrawStatus' = 'WithdrawStatus',
   'WithdrawCancel' = 'WithdrawCancel',
+  'WalletTransfer' = 'WalletTransfer',
+  'Stake' = 'Stake',
+  'Unstake' = 'Unstake',
+  'Staking/Assets' = 'Staking/Assets',
+  'Staking/Pending' = 'Staking/Pending',
+  'Staking/Transactions' = 'Staking/Transactions',
   'GetWebSocketsToken' = 'GetWebSocketsToken',
 }
 
