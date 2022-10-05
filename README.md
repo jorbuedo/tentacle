@@ -22,10 +22,5 @@ npm run package
 npm run tauri dev
 ```
 
-There's no UI to add Kraken key/secret yet, but you can do so via
-
-```
-window.model.updateKrakenApiKey({ key: 'xx', secret: 'xx'})
-```
-
-Both values can be generated on the exchange website (add 1000 nonce to the key).
+API Key is generated on the exchange website (add at least 1000 nonce).
+This app only requires permission to Query Ledger Entries.
