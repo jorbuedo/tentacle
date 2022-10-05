@@ -14,6 +14,7 @@ Works as a desktop app with the following stack:
 
 In active but slow development, it's a side project for personal use and checking out the stack.
 Feel free to browse the code and drop a comment.
+Develped on linux, but it should work on Mac and Windows. Let me know if it doesn't.
 
 ## Instructions
 
