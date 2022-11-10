@@ -18,6 +18,11 @@ Develped on linux, but it should work on Mac and Windows. Let me know if it does
 
 ## Instructions
 
+Make sure to follow the rust install instructions from tauri at:
+https://tauri.app/v1/guides/getting-started/prerequisites
+
+Then proceed with npm:
+
 ```
 npm install
 npm run package
